@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 import Nav from './components/nav';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 function App() {
 	const [cartItemCount, setCartItemCount] = useState(0);
 
@@ -21,7 +20,7 @@ function App() {
 			<footer className="bg-teal-950 text-center py-8 text-lg">
 				<span className="">Copyright 2024 Pedro Silva </span>
 				<a target="_blank" href="https://github.com/PetrusMaximus0">
-					GITHUB_ICON
+					<i className="devicon-github-original"></i>
 				</a>
 			</footer>
 		</div>
