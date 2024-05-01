@@ -1,5 +1,6 @@
 import App from './App';
 import ErrorPage from './components/error';
+import Home from './components/home';
 const routes = [
 	{
 		path: '/',
@@ -8,7 +9,7 @@ const routes = [
 		children: [
 			{
 				path: '/',
-				element: <h1>This is HOME</h1>,
+				element: <Home />,
 			},
 			{
 				path: '/products',

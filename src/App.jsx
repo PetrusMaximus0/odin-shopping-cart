@@ -7,10 +7,10 @@ function App() {
 	const [cartItemCount, setCartItemCount] = useState(0);
 
 	return (
-		<div className="font-sans text-white grid gap-4 min-h-screen grid-rows-[auto_1fr_auto]">
+		<div className="font-sans text-slate-200 grid gap-4 min-h-screen grid-rows-[auto_1fr_auto]">
 			<header className="p-8 bg-teal-950 flex justify-between">
-				<Link to="/" className="text-2xl">
-					AWESOME STORE
+				<Link to="/" className="text-2xl italic hover:text-orange-300">
+					THE IMPULSE SHOPPER
 				</Link>
 				<Nav cartItemCount={cartItemCount} />
 			</header>
