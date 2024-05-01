@@ -1,6 +1,8 @@
 import App from './App';
 import ErrorPage from './components/error';
 import Home from './components/home';
+import ProductList from './components/productList';
+import ProductDetail from './components/productDetail';
 const routes = [
 	{
 		path: '/',
@@ -13,11 +15,11 @@ const routes = [
 			},
 			{
 				path: '/products',
-				element: <h1>This is a store</h1>,
+				element: <ProductList />,
 			},
 			{
 				path: '/products/:id',
-				element: <h1>Product with id </h1>,
+				element: <ProductDetail />,
 			},
 			{
 				path: '/cart',

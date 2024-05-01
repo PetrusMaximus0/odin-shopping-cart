@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 const Home = () => {
 	return (
-		<section className="h-full flex flex-row flex-wrap justify-around items-center">
+		<section className="main-animate h-full flex flex-row flex-wrap justify-around items-center">
 			<div className="text-center">
 				<h1 className="text-orange-400 text-5xl my-4"> Impulse Shopper </h1>
 				<p className="text-2xl my-8 flex gap-4 items-center justify-center">
