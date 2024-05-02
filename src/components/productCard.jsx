@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import AddToCartBtn from './addToCard';
+import AddToCartBtn from './addToCart';
 
 const ProductCard = ({ data }) => {
 	const handleAddToCart = (number) => {

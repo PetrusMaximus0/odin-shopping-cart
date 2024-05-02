@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Icon from '@mdi/react';
 import { mdiPlus, mdiMinus } from '@mdi/js';
 
-const AddToCartBtn = ({ handleFormSubmit }) => {
+const AddToCartBtn = ({ btnText = 'Add to Cart', handleFormSubmit }) => {
 	const incNum = () => {
 		setNum(num + 1);
 	};
@@ -32,7 +32,7 @@ const AddToCartBtn = ({ handleFormSubmit }) => {
 		>
 			<div className="flex justify-center items-center gap-1">
 				<button
-					className="hover:bg-teal-500 active:bg-teal-950 active:text-white rounded-xl"
+					className="hover:bg-teal-500 active:bg-orange-300 active:text-white rounded-xl"
 					onClick={decNum}
 					type="button"
 				>
@@ -47,15 +47,15 @@ const AddToCartBtn = ({ handleFormSubmit }) => {
 					disabled
 				/>
 				<button
-					className="hover:bg-teal-500 active:bg-teal-950 active:text-white rounded-xl"
+					className="hover:bg-teal-500 active:bg-orange-300 active:text-white rounded-xl"
 					onClick={incNum}
 					type="button"
 				>
 					<Icon path={mdiPlus} size={1} />
 				</button>
 			</div>
-			<button className="hover:bg-teal-500 text-white bg-teal-950 active:bg-teal-950 rounded-xl px-4 py-1">
-				Add to Cart
+			<button className="hover:bg-teal-500 text-white bg-orange-300 active:bg-orange-300 rounded-xl px-4 py-1">
+				{btnText}
 			</button>
 		</form>
 	);
@@ -63,6 +63,7 @@ const AddToCartBtn = ({ handleFormSubmit }) => {
 
 AddToCartBtn.propTypes = {
 	handleFormSubmit: PropTypes.func.isRequired,
+	btnText: PropTypes.string,
 };
 
 export default AddToCartBtn;

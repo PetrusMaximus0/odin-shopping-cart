@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import AddToCartBtn from './addToCard';
+import AddToCartBtn from './addToCart';
 
 const ProductDetail = () => {
 	const { id } = useParams();
@@ -48,7 +48,7 @@ const ProductDetail = () => {
 						</figure>
 						<div className="flex flex-col gap-8 justify-between items-start">
 							<h1 className="text-2xl">{product.title}</h1>
-							<p>{product.price}€</p>
+							<p className="text-3xl">{product.price}€</p>
 							<p>{product.description}</p>
 							<AddToCartBtn handleFormSubmit={handleAddToCart} />
 						</div>

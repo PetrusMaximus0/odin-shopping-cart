@@ -3,6 +3,7 @@ import ErrorPage from './components/error';
 import Home from './components/home';
 import ProductList from './components/productList';
 import ProductDetail from './components/productDetail';
+import Cart from './components/cart';
 const routes = [
 	{
 		path: '/',
@@ -23,7 +24,7 @@ const routes = [
 			},
 			{
 				path: '/cart',
-				element: <h1>This is the shopping cart!</h1>,
+				element: <Cart />,
 			},
 		],
 	},

@@ -7,7 +7,7 @@ const Home = () => {
 				<p className="text-2xl my-8 flex gap-4 items-center justify-center">
 					Don&apos;t think, just
 					<Link
-						className="hover:bg-orange-300 hover: max-w-fit text-2xl px-6 py-1 bg-slate-400 text-teal-950 rounded-xl"
+						className="hover:bg-orange-300 hover: max-w-fit text-2xl px-6 py-1 bg-orange-300 text-orange-700 rounded-xl"
 						to="/products"
 					>
 						Buy
