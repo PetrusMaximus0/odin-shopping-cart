@@ -17,8 +17,12 @@ const ProductList = () => {
 				return response.json();
 			})
 			.then((response) => {
+				const products = [];
+				response.forEach((product) => {
+					products.push({ ...product, inCart: 1 });
+				});
 				// Store the information of these items.
-				setProducts(response);
+				setProducts(products);
 			})
 			.catch((error) => setError(error))
 			.finally(() => setLoading(false));
