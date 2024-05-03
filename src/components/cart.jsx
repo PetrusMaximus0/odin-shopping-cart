@@ -1,9 +1,14 @@
 import CartItem from './cartItem';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useOutletContext } from 'react-router-dom';
+import { useState } from 'react';
 
 const Cart = () => {
+	//
 	const [cartItems, setCartItems] = useOutletContext();
+	const [orderPlaced, setOrderPlaced] = useState(false);
+
+	//
 	const updateTotal = () => {
 		let result = cartItems.reduce(
 			(accumulator, currentValue) =>
@@ -13,14 +18,21 @@ const Cart = () => {
 		return result;
 	};
 
+	const navigate = useNavigate();
+
+	// Set up the order submission
 	const handleOrderSubmit = (e) => {
 		e.preventDefault();
-		const formBody = [];
+
+		// Prevent submiting orders with NaN price values.
 		const result = updateTotal();
 		if (isNaN(result)) {
 			console.error('Error Submitting the Order');
 			return;
 		}
+
+		// Build the form body
+		const formBody = [];
 		cartItems.forEach((item) =>
 			formBody.push({
 				id: item.id,
@@ -28,8 +40,19 @@ const Cart = () => {
 				quantity: item.quantity,
 			})
 		);
+
+		// Simulate the routing to an order submission
 		console.log(JSON.stringify(formBody));
+		setOrderPlaced(true);
+		setTimeout(() => {
+			// Empty the cart to simulate a successful order submission
+			setCartItems([]);
+			// Redirect to the main page
+			navigate('/');
+		}, 2000);
 	};
+
+	//
 	return (
 		(cartItems.length > 0 && (
 			<section className="container main-animate flex flex-col my-4 mx-auto px-8 gap-4">
@@ -62,14 +85,19 @@ const Cart = () => {
 						Checkout
 					</button>
 				</div>
+				<p className={orderPlaced ? 'text-center text-2xl ' : 'invisible'}>
+					Order Succesful
+				</p>
+				<p className={orderPlaced ? 'text-center text-1xl ' : 'invisible'}>
+					Returning to Home page shortly.
+				</p>
 			</section>
 		)) || (
 			<section className="text-center">
 				<h1 className="text-4xl my-8 ">Your Cart is Empty</h1>
 				<p className="font-light text-2xl">
-					Would you like to
+					Would you like to{' '}
 					<Link className="text-orange-600" to="/products">
-						{' '}
 						Browse our wares?
 					</Link>
 				</p>

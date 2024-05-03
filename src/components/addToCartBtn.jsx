@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Icon from '@mdi/react';
-import { mdiPlus, mdiMinus } from '@mdi/js';
+import { mdiPlus, mdiMinus, mdiCheckCircleOutline } from '@mdi/js';
 
 const AddToCartBtn = ({ btnText = 'Add to Cart', handleFormSubmit }) => {
+	const [altBtnText, setAltBtnText] = useState(null);
+
 	const incNum = () => {
 		setNum(parseInt(num + 1));
 	};
@@ -21,6 +23,16 @@ const AddToCartBtn = ({ btnText = 'Add to Cart', handleFormSubmit }) => {
 		if (!isNaN(num) && num >= 1) {
 			handleFormSubmit(num);
 			setNum(1);
+			let timeNum = 3;
+			setAltBtnText(`Item Added`);
+			const intervalId = setInterval(() => {
+				if (timeNum === 0) {
+					clearInterval(intervalId);
+					setAltBtnText(null);
+				} else {
+					timeNum -= 1;
+				}
+			}, 1000);
 		}
 	};
 
@@ -33,7 +45,7 @@ const AddToCartBtn = ({ btnText = 'Add to Cart', handleFormSubmit }) => {
 
 	return (
 		<form
-			className="flex justify-center gap-2"
+			className="flex justify-between items-center gap-1"
 			onSubmit={submitForm}
 			action=""
 		>
@@ -64,9 +76,15 @@ const AddToCartBtn = ({ btnText = 'Add to Cart', handleFormSubmit }) => {
 					<Icon path={mdiPlus} size={1} />
 				</button>
 			</div>
+
 			<button className="hover:bg-teal-500 text-white bg-orange-300 active:bg-orange-300 rounded-xl px-4 py-1">
-				{btnText}
+				{altBtnText || btnText}
 			</button>
+			<Icon
+				className={altBtnText !== null ? 'text-teal-500' : 'invisible'}
+				path={mdiCheckCircleOutline}
+				size={1}
+			/>
 		</form>
 	);
 };
