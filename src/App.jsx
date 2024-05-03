@@ -4,7 +4,13 @@ import Nav from './components/nav';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 function App() {
-	const [cartItemCount, setCartItemCount] = useState(0);
+	const [cartItems, setCartItems] = useState([]);
+	const totalItemsInCart = () => {
+		let result = cartItems.reduce((accumulator, currentValue) => {
+			return accumulator + currentValue.quantity;
+		}, 0);
+		return result;
+	};
 
 	return (
 		<div className="font-sans text-slate-200 grid gap-4 min-h-screen grid-rows-[auto_1fr_auto]">
@@ -13,11 +19,11 @@ function App() {
 					<Link to="/" className="text-2xl italic hover:text-orange-300">
 						THE IMPULSE SHOPPER
 					</Link>
-					<Nav cartItemCount={cartItemCount} />
+					<Nav cartItemCount={totalItemsInCart()} />
 				</div>
 			</header>
 			<main className="container mx-auto">
-				<Outlet context={[cartItemCount, setCartItemCount]} />
+				<Outlet context={[cartItems, setCartItems]} />
 			</main>
 			<footer className="bg-teal-950 shadow-teal-950 shadow-[0px_-5px_10px] text-center py-8 text-lg">
 				<div className="container mx-auto">

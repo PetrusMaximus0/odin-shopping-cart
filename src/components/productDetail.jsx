@@ -1,15 +1,20 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import AddToCartBtn from './addToCart';
+import { useOutletContext, useParams } from 'react-router-dom';
+import AddToCartBtn from './addToCartBtn';
 
 const ProductDetail = () => {
 	const { id } = useParams();
+
 	// Extract the correct product from the data.
 	const [product, setProduct] = useState(null);
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(true);
 
+	// Access the context
+	const [cartItems, setCartItems] = useOutletContext();
+
+	//
 	useEffect(() => {
 		const url = 'https://fakestoreapi.com/products/' + id;
 		fetch(url, { mode: 'cors' })
@@ -25,8 +30,19 @@ const ProductDetail = () => {
 	}, [id]);
 
 	const handleAddToCart = (number) => {
-		console.log('The form was submitted!', number, 'items added to cart');
-		// add to the data object how many in the cart.
+		// Check if this product is in the cart
+		const newProducts = [...cartItems];
+		const index = newProducts.findIndex((element) => {
+			return element.id === parseInt(id);
+		});
+		if (index !== -1) {
+			// The product is in the cart, add quantity.
+			newProducts[index].quantity += number;
+			setCartItems(newProducts);
+		} else {
+			// The product isn't in the cart, add it to the cart.
+			setCartItems([...newProducts, { ...product, quantity: number }]);
+		}
 	};
 
 	return (

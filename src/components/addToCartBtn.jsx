@@ -5,20 +5,27 @@ import { mdiPlus, mdiMinus } from '@mdi/js';
 
 const AddToCartBtn = ({ btnText = 'Add to Cart', handleFormSubmit }) => {
 	const incNum = () => {
-		setNum(num + 1);
+		setNum(parseInt(num + 1));
 	};
 
 	const decNum = () => {
 		if (num > 1) {
 			setNum(num - 1);
+		} else {
+			setNum(1);
 		}
 	};
 
 	const submitForm = (e) => {
 		e.preventDefault();
-		setNum(1);
-		// Returns the number to add.
-		handleFormSubmit(num);
+		if (!isNaN(num) && num >= 1) {
+			handleFormSubmit(num);
+			setNum(1);
+		}
+	};
+
+	const handleInputChange = (e) => {
+		setNum(parseInt(e.target.value));
 	};
 
 	// Number that will be sent with the form on submit
@@ -40,11 +47,14 @@ const AddToCartBtn = ({ btnText = 'Add to Cart', handleFormSubmit }) => {
 				</button>
 				<input
 					className="w-16 rounded-xl border border-teal-950 text-center"
-					type="text"
+					min={1}
+					max={10}
+					type="number"
 					name="productNumber"
 					id="productNumber"
+					required
 					value={num}
-					disabled
+					onChange={handleInputChange}
 				/>
 				<button
 					className="hover:bg-teal-500 active:bg-orange-300 active:text-white rounded-xl"
