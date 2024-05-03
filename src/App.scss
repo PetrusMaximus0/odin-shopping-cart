@@ -26,14 +26,6 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-input{
-    border-color: black;
-}
-
 input:invalid, input[value=""]{
     border: 1px solid red;
-}
-
-*:focus{
-    background-color: lightskyblue;
 }
