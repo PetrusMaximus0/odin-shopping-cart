@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 const Home = () => {
 	return (
 		<section className="main-animate h-full flex flex-row flex-wrap justify-around items-center">
-			<div className="text-center">
+			<header className="text-center">
 				<h1 className="text-orange-400 text-5xl my-4"> Impulse Shopper </h1>
 				<p className="text-2xl my-8 flex gap-4 items-center justify-center">
 					Don&apos;t think, just
@@ -13,7 +13,7 @@ const Home = () => {
 						Buy
 					</Link>
 				</p>
-			</div>
+			</header>
 			<figure className="w-80 h-auto">
 				<img src="/home.svg" alt="IMAGE" />
 				<legend className="text-center font-thin text-xs">

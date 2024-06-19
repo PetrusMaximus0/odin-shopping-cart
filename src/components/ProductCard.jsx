@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import AddToCartBtn from './addToCartBtn';
+import AddToCartBtn from './AddToCartBtn';
 import { useOutletContext } from 'react-router-dom';
 
 const ProductCard = ({ data }) => {

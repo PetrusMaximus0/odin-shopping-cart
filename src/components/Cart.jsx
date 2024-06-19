@@ -1,4 +1,4 @@
-import CartItem from './cartItem';
+import CartItem from './CartItem';
 import { Link, useNavigate } from 'react-router-dom';
 import { useOutletContext } from 'react-router-dom';
 import { useState } from 'react';

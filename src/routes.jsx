@@ -1,9 +1,9 @@
 import App from './App';
-import ErrorPage from './components/error';
-import Home from './components/home';
-import ProductList from './components/productList';
-import ProductDetail from './components/productDetail';
-import Cart from './components/cart';
+import ErrorPage from './components/Error';
+import Home from './components/Home';
+import ProductList from './components/ProductList';
+import ProductDetail from './components/ProductDetail';
+import Cart from './components/Cart';
 const routes = [
 	{
 		path: '/',

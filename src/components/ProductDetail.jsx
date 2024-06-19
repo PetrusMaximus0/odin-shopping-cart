@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
-import AddToCartBtn from './addToCartBtn';
+import AddToCartBtn from './AddToCartBtn';
 
 const ProductDetail = () => {
 	const { id } = useParams();

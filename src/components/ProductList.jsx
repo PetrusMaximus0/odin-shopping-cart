@@ -1,4 +1,4 @@
-import ProductCard from './productCard';
+import ProductCard from './ProductCard';
 import { useState, useEffect } from 'react';
 
 const ProductList = () => {
@@ -17,9 +17,8 @@ const ProductList = () => {
 				return response.json();
 			})
 			.then((response) => {
-				const products = [];
-				response.forEach((product) => {
-					products.push({ ...product, inCart: 1 });
+				const products = response.map((product) => {
+					return { ...product, inCart: 1 };
 				});
 				// Store the information of these items.
 				setProducts(products);
