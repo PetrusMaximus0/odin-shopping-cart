@@ -51,6 +51,7 @@ const AddToCartBtn = ({ btnText = 'Add to Cart', handleFormSubmit }) => {
 		>
 			<div className="flex justify-center items-center gap-1">
 				<button
+					aria-label="decrease items"
 					className="hover:bg-teal-500 active:bg-orange-300 active:text-white rounded-xl"
 					onClick={decNum}
 					type="button"
@@ -58,6 +59,7 @@ const AddToCartBtn = ({ btnText = 'Add to Cart', handleFormSubmit }) => {
 					<Icon path={mdiMinus} size={1} />
 				</button>
 				<input
+					aria-label="product number"
 					className="w-16 rounded-xl border border-teal-950 text-center"
 					min={1}
 					max={10}
@@ -69,6 +71,7 @@ const AddToCartBtn = ({ btnText = 'Add to Cart', handleFormSubmit }) => {
 					onChange={handleInputChange}
 				/>
 				<button
+					aria-label="increase items"
 					className="hover:bg-teal-500 active:bg-orange-300 active:text-white rounded-xl"
 					onClick={incNum}
 					type="button"
@@ -77,7 +80,10 @@ const AddToCartBtn = ({ btnText = 'Add to Cart', handleFormSubmit }) => {
 				</button>
 			</div>
 
-			<button className="hover:bg-teal-500 text-white bg-orange-300 active:bg-orange-300 rounded-xl px-4 py-1">
+			<button
+				type="submit"
+				className="hover:bg-teal-500 text-white bg-orange-300 active:bg-orange-300 rounded-xl px-4 py-1"
+			>
 				{altBtnText || btnText}
 			</button>
 			<Icon
