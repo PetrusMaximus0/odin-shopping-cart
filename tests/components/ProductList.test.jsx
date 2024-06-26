@@ -42,8 +42,6 @@ describe('ProductList component', () => {
 			expect(errMessage.length).toBeGreaterThanOrEqual(1);
 		});
 
-		screen.debug();
-
 		//
 	});
 
@@ -84,7 +82,5 @@ describe('ProductList component', () => {
 			const liElement = screen.queryAllByRole('listitem');
 			expect(liElement).toHaveLength(3);
 		});
-
-		screen.debug();
 	});
 });
