@@ -31,7 +31,10 @@ const Nav = ({ cartItemCount = 0 }) => {
 						to="/cart"
 					>
 						<Icon path={mdiCartVariant} size={1} />
-						Cart {cartItemCount > 0 ? `(${cartItemCount})` : ''}
+						<span>
+							{' '}
+							Cart {cartItemCount > 0 ? `(${cartItemCount})` : ''}
+						</span>
 					</Link>
 				</li>
 			</ul>
