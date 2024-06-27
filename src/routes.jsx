@@ -4,10 +4,16 @@ import Home from './components/Home';
 import ProductList from './components/ProductList';
 import ProductDetail from './components/ProductDetail';
 import Cart from './components/Cart';
+import CartContextProvider from './components/CartContextProvider';
+
 const routes = [
 	{
 		path: '/',
-		element: <App />,
+		element: (
+			<CartContextProvider>
+				<App />
+			</CartContextProvider>
+		),
 		errorElement: <ErrorPage />,
 		children: [
 			{
