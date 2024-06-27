@@ -1,11 +1,15 @@
 import Icon from '@mdi/react';
 import PropTypes from 'prop-types';
 import { mdiPlus, mdiMinus } from '@mdi/js';
-import { useOutletContext } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import CartContext from '../contexts/CartContext';
 
 const CartItem = ({ item }) => {
-	const [cartItems, setCartItems] = useOutletContext();
+	//
+	const { cartItems, setCartItems } = useContext(CartContext);
+
+	//
 	const handleNumChange = (e) => {
 		const newCartItems = [...cartItems];
 		const index = newCartItems.findIndex((element) => element.id === item.id);
@@ -17,6 +21,7 @@ const CartItem = ({ item }) => {
 		}
 	};
 
+	//
 	const incrementNum = () => {
 		const newCartItems = [...cartItems];
 		const index = newCartItems.findIndex((element) => element.id === item.id);
@@ -28,6 +33,7 @@ const CartItem = ({ item }) => {
 		}
 	};
 
+	//
 	const decrementNum = () => {
 		const newCartItems = [...cartItems];
 		const index = newCartItems.findIndex((element) => element.id === item.id);
@@ -41,6 +47,7 @@ const CartItem = ({ item }) => {
 		}
 	};
 
+	//
 	const removeItem = () => {
 		const newCartItems = [...cartItems];
 		const index = newCartItems.findIndex((element) => element.id === item.id);
