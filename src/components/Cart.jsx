@@ -1,32 +1,36 @@
 import CartItem from './CartItem';
 import { Link, useNavigate } from 'react-router-dom';
-import { useOutletContext } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import CartContext from '../contexts/CartContext';
 
 const Cart = () => {
 	//
-	const [cartItems, setCartItems] = useOutletContext();
+	const navigate = useNavigate();
+
+	const { cartItems, setCartItems } = useContext(CartContext);
+
 	const [orderPlaced, setOrderPlaced] = useState(false);
 
 	//
-	const updateTotal = () => {
-		let result = cartItems.reduce(
+	const [totalPrice, setTotalPrice] = useState(0);
+	useEffect(() => {
+		//
+		const newTotalPrice = cartItems.reduce(
 			(accumulator, currentValue) =>
 				accumulator + currentValue.price * currentValue.quantity,
 			0
 		);
-		return result;
-	};
 
-	const navigate = useNavigate();
+		//
+		setTotalPrice(newTotalPrice);
+	}, [cartItems]);
 
 	// Set up the order submission
 	const handleOrderSubmit = (e) => {
 		e.preventDefault();
 
 		// Prevent submiting orders with NaN price values.
-		const result = updateTotal();
-		if (isNaN(result)) {
+		if (isNaN(totalPrice)) {
 			console.error('Error Submitting the Order');
 			return;
 		}
@@ -42,7 +46,6 @@ const Cart = () => {
 		);
 
 		// Simulate the routing to an order submission
-		console.log(JSON.stringify(formBody));
 		setOrderPlaced(true);
 		setTimeout(() => {
 			// Empty the cart to simulate a successful order submission
@@ -73,7 +76,7 @@ const Cart = () => {
 					<p className="text-2xl ">
 						Total:{' '}
 						<span className="font-semibold">
-							{updateTotal().toFixed(2)} €
+							{totalPrice.toFixed(2)} €
 						</span>
 					</p>
 
