@@ -2,8 +2,21 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Icon from '@mdi/react';
 import { mdiHome, mdiCartVariant, mdiShoppingOutline } from '@mdi/js';
+import { useContext, useEffect, useState } from 'react';
+import CartContext from '../contexts/CartContext';
 
-const Nav = ({ cartItemCount = 0 }) => {
+const Nav = () => {
+	const [cartItemCount, setCartItemCount] = useState(0);
+
+	const { cartItems } = useContext(CartContext);
+
+	useEffect(() => {
+		const result = cartItems.reduce((accumulator, currentValue) => {
+			return accumulator + currentValue.quantity;
+		}, 0);
+		setCartItemCount(result);
+	}, [cartItems]);
+
 	return (
 		<nav className="text-lg">
 			<ul className="flex gap-4">
