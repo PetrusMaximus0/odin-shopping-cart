@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+
 const Home = () => {
 	return (
 		<section className="main-animate h-full flex flex-row flex-wrap justify-around items-center">
