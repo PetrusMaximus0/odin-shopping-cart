@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { useOutletContext, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import AddToCartBtn from './AddToCartBtn';
 
 const ProductDetail = () => {
@@ -10,9 +10,6 @@ const ProductDetail = () => {
 	const [product, setProduct] = useState(null);
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(true);
-
-	// Access the context
-	const [cartItems, setCartItems] = useOutletContext();
 
 	//
 	useEffect(() => {
@@ -28,22 +25,6 @@ const ProductDetail = () => {
 			.catch((error) => setError(error))
 			.finally(() => setLoading(false));
 	}, [id]);
-
-	const handleAddToCart = (number) => {
-		// Check if this product is in the cart
-		const newProducts = [...cartItems];
-		const index = newProducts.findIndex((element) => {
-			return element.id === parseInt(id);
-		});
-		if (index !== -1) {
-			// The product is in the cart, add quantity.
-			newProducts[index].quantity += number;
-			setCartItems(newProducts);
-		} else {
-			// The product isn't in the cart, add it to the cart.
-			setCartItems([...newProducts, { ...product, quantity: number }]);
-		}
-	};
 
 	return (
 		<>
@@ -66,7 +47,7 @@ const ProductDetail = () => {
 							<h1 className="text-2xl">{product.title}</h1>
 							<p className="text-3xl">{product.price}€</p>
 							<p>{product.description}</p>
-							<AddToCartBtn handleFormSubmit={handleAddToCart} />
+							<AddToCartBtn data={product} />
 						</div>
 					</section>
 				)}
