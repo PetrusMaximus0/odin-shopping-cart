@@ -8,8 +8,10 @@
 		"build": "vite build",
 		"lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "vite preview",
-		"test": "vitest --pool=forks --coverage",
-		"test:ui": "vitest --ui --pool=forks --coverage"
+		"test": "vitest --pool=forks",
+		"test:coverage": "vitest --pool=forks --coverage",
+		"test:ui": "vitest --ui --pool=forks",
+		"test:ui:coverage": "vitest --ui --pool=forks --coverage"
 	},
 	"dependencies": {
 		"@mdi/js": "^7.4.47",
