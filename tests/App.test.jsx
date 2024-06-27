@@ -3,12 +3,17 @@ import App from '../src/App';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import userEvent from '@testing-library/user-event';
+import CartContextProvider from '../src/components/CartContextProvider';
 
 describe('App component', () => {
 	const routes = [
 		{
 			path: '/',
-			element: <App />,
+			element: (
+				<CartContextProvider>
+					<App />
+				</CartContextProvider>
+			),
 			children: [
 				{
 					path: '/',
