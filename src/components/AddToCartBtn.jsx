@@ -1,15 +1,19 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Icon from '@mdi/react';
 import { mdiPlus, mdiMinus, mdiCheckCircleOutline } from '@mdi/js';
+import CartContext from '../contexts/CartContext';
 
-const AddToCartBtn = ({ btnText = 'Add to Cart', handleFormSubmit }) => {
+const AddToCartBtn = ({ btnText = 'Add to Cart', data }) => {
+	//
 	const [altBtnText, setAltBtnText] = useState(null);
 
+	//
 	const incNum = () => {
 		setNum(parseInt(num + 1));
 	};
 
+	//
 	const decNum = () => {
 		if (num > 1) {
 			setNum(num - 1);
@@ -18,10 +22,37 @@ const AddToCartBtn = ({ btnText = 'Add to Cart', handleFormSubmit }) => {
 		}
 	};
 
+	//
+	const { cartItems, setCartItems } = useContext(CartContext);
+
+	const handleAddToCart = (number) => {
+		//
+		const newCartItems = [...cartItems];
+
+		// Check if the product is in the cart already.
+		const index = newCartItems.findIndex((item) => data.id === item.id);
+
+		if (index !== -1) {
+			//The product is in the cart, add quantity.
+			newCartItems[index].quantity += number;
+
+			//
+			setCartItems(newCartItems);
+		} else {
+			// The product is not in the cart, add a new entry for this product
+			setCartItems([...cartItems, { ...data, quantity: number }]);
+		}
+	};
+
+	// Number of items to add to the cart
+	const [num, setNum] = useState(1);
+
+	// Form Submission Callback
 	const submitForm = (e) => {
 		e.preventDefault();
 		if (!isNaN(num) && num >= 1) {
-			handleFormSubmit(num);
+			// Add the items to the cartItems State
+			handleAddToCart(num);
 			setNum(1);
 			let timeNum = 3;
 			setAltBtnText(`Item Added`);
@@ -39,9 +70,6 @@ const AddToCartBtn = ({ btnText = 'Add to Cart', handleFormSubmit }) => {
 	const handleInputChange = (e) => {
 		setNum(parseInt(e.target.value));
 	};
-
-	// Number that will be sent with the form on submit
-	const [num, setNum] = useState(1);
 
 	return (
 		<form
@@ -96,7 +124,7 @@ const AddToCartBtn = ({ btnText = 'Add to Cart', handleFormSubmit }) => {
 };
 
 AddToCartBtn.propTypes = {
-	handleFormSubmit: PropTypes.func.isRequired,
+	data: PropTypes.object,
 	btnText: PropTypes.string,
 };
 
