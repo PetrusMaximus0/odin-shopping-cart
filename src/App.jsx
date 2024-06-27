@@ -1,17 +1,8 @@
 import './App.scss';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import Nav from './components/Nav';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-function App() {
-	const [cartItems, setCartItems] = useState([]);
-	const totalItemsInCart = () => {
-		let result = cartItems.reduce((accumulator, currentValue) => {
-			return accumulator + currentValue.quantity;
-		}, 0);
-		return result;
-	};
 
+function App() {
 	return (
 		<div className="font-sans text-teal-950 grid gap-4 min-h-screen grid-rows-[auto_1fr_auto]">
 			<header className="bg-teal-200 shadow-lg shadow-teal-200">
@@ -24,11 +15,11 @@ function App() {
 							THE IMPULSE SHOPPER
 						</Link>
 					</h1>
-					<Nav cartItemCount={totalItemsInCart()} />
+					<Nav />
 				</div>
 			</header>
 			<main className="container mx-auto">
-				<Outlet context={[cartItems, setCartItems]} />
+				<Outlet />
 			</main>
 			<footer className="bg-teal-200 shadow-teal-200 shadow-[0px_-5px_10px] text-center py-8 text-lg">
 				<p className="container flex justify-center gap-2 items-center mx-auto text-xl">
