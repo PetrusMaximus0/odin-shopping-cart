@@ -1,30 +1,12 @@
-import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import AddToCartBtn from './AddToCartBtn';
+import useFetchProductDetail from '../hooks/useFetchProductDetail';
 
 const ProductDetail = () => {
 	const { id } = useParams();
 
 	// Extract the correct product from the data.
-	const [product, setProduct] = useState(null);
-	const [error, setError] = useState(null);
-	const [loading, setLoading] = useState(true);
-
-	//
-	useEffect(() => {
-		const url = 'https://fakestoreapi.com/products/' + id;
-		fetch(url, { mode: 'cors' })
-			.then((response) => {
-				if (response.status >= 400) {
-					throw new Error('Server Error');
-				}
-				return response.json();
-			})
-			.then((response) => setProduct(response))
-			.catch((error) => setError(error))
-			.finally(() => setLoading(false));
-	}, [id]);
+	const { product, loading, error } = useFetchProductDetail(id);
 
 	return (
 		<>
@@ -53,10 +35,6 @@ const ProductDetail = () => {
 				)}
 		</>
 	);
-};
-
-ProductDetail.propTypes = {
-	product: PropTypes.object,
 };
 
 export default ProductDetail;
