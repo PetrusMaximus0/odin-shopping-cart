@@ -13,6 +13,7 @@ const Cart = () => {
 
 	//
 	const [totalPrice, setTotalPrice] = useState(0);
+
 	useEffect(() => {
 		//
 		const newTotalPrice = cartItems.reduce(
@@ -34,16 +35,6 @@ const Cart = () => {
 			console.error('Error Submitting the Order');
 			return;
 		}
-
-		// Build the form body
-		const formBody = [];
-		cartItems.forEach((item) =>
-			formBody.push({
-				id: item.id,
-				price: item.price,
-				quantity: item.quantity,
-			})
-		);
 
 		// Simulate the routing to an order submission
 		setOrderPlaced(true);
@@ -88,12 +79,14 @@ const Cart = () => {
 						Checkout
 					</button>
 				</div>
-				<p className={orderPlaced ? 'text-center text-2xl ' : 'invisible'}>
-					Order Succesful
-				</p>
-				<p className={orderPlaced ? 'text-center text-1xl ' : 'invisible'}>
-					Returning to Home page shortly.
-				</p>
+				{orderPlaced && (
+					<>
+						<p className="text-center text-2xl">Order Successful</p>
+						<p className="text-center text-1xl ">
+							Returning to Home page shortly.
+						</p>
+					</>
+				)}
 			</section>
 		)) || (
 			<section className="text-center">
