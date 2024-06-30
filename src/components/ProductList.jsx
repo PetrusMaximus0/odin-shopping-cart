@@ -1,31 +1,9 @@
 import ProductCard from './ProductCard';
-import { useState, useEffect } from 'react';
+import useFetchProducts from '../hooks/useFetchProducts';
 
 const ProductList = () => {
-	// An array of product objects
-	const [products, setProducts] = useState([]);
-	const [error, setError] = useState(null);
-	const [loading, setLoading] = useState(true);
-
 	// Get a number of items from the fakestore API
-	useEffect(() => {
-		fetch('https://fakestoreapi.com/products?limit=20', { mode: 'cors' })
-			.then((response) => {
-				if (response.status >= 400) {
-					throw new Error('Server Error');
-				}
-				return response.json();
-			})
-			.then((response) => {
-				const products = response.map((product) => {
-					return { ...product, inCart: 1 };
-				});
-				// Store the information of these items.
-				setProducts(products);
-			})
-			.catch((error) => setError(error))
-			.finally(() => setLoading(false));
-	}, []);
+	const { products, loading, error } = useFetchProducts();
 
 	return (
 		<section>
