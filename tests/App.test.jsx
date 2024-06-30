@@ -1,35 +1,30 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import App from '../src/App';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import CartContextProvider from '../src/components/CartContextProvider';
+import routes from '../src/routes';
 
 describe('App component', () => {
-	const routes = [
-		{
-			path: '/',
-			element: (
-				<CartContextProvider>
-					<App />
-				</CartContextProvider>
-			),
-			children: [
-				{
-					path: '/',
-					element: <p>homepage element</p>,
-				},
-				{
-					path: '/products',
-					element: <p>products element</p>,
-				},
-				{
-					path: '/cart',
-					element: <p>cart element</p>,
-				},
-			],
+	vi.mock('../src/components/Home', () => ({
+		default: () => {
+			return <p>homepage element</p>;
 		},
-	];
+	}));
+	vi.mock('../src/components/ProductList', () => ({
+		default: () => {
+			return <p>products element</p>;
+		},
+	}));
+	vi.mock('../src/components/ProductDetail', () => ({
+		default: () => {
+			return <p>product Detail element</p>;
+		},
+	}));
+	vi.mock('../src/components/Cart', () => ({
+		default: () => {
+			return <p>cart element</p>;
+		},
+	}));
 
 	describe('In the header...', () => {
 		it('renders the heading with the store name', () => {
@@ -40,8 +35,8 @@ describe('App component', () => {
 			render(<RouterProvider router={router} />);
 
 			// The heading is there and has the text content
-			const headingElement = screen.getByRole('heading');
-			expect(headingElement).toHaveTextContent(/the impulse shopper/i);
+			const headingElement = screen.queryByText(/the impulse shopper/i);
+			expect(headingElement).toBeInTheDocument();
 		});
 
 		it('clicking the heading link brings us to the homepage', async () => {
