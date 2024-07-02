@@ -4,16 +4,29 @@ import { screen, render, waitFor } from '@testing-library/react';
 import Cart from '../../src/components/Cart';
 import CartContext from '../../src/contexts/CartContext';
 
-import { createMemoryRouter, Router, RouterProvider } from 'react-router-dom';
+import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
+
+import { useState } from 'react';
 
 vi.mock('../../src/components/CartItem', () => ({
 	default: () => <div> Item Card </div>,
 }));
 
+//
 describe('Cart Component', () => {
 	//
-	const getRouter = (items) =>
+	const CartWrapper = ({ items }) => {
+		const [cartItems, setCartItems] = useState(items);
+		return (
+			<CartContext.Provider value={{ cartItems, setCartItems }}>
+				<Cart />
+			</CartContext.Provider>
+		);
+	};
+
+	//
+	const getRouter = (products) =>
 		createMemoryRouter(
 			[
 				{
@@ -22,11 +35,7 @@ describe('Cart Component', () => {
 				},
 				{
 					path: '/cart',
-					element: (
-						<CartContext.Provider value={{ cartItems: items }}>
-							<Cart />
-						</CartContext.Provider>
-					),
+					element: <CartWrapper items={products} />,
 				},
 			],
 			{
@@ -81,7 +90,32 @@ describe('Cart Component', () => {
 				screen.queryByText('Returning to Home page shortly.')
 			).toBeInTheDocument();
 		});
+
+		await waitFor(
+			() => {
+				expect(screen.queryByText('Homepage')).toBeInTheDocument();
+				expect(
+					screen.queryByText('Order Successful')
+				).not.toBeInTheDocument();
+			},
+			{ timeout: 2100 }
+		);
 	});
 
-	it.todo("doesn't submit the order if the total price is invalid.");
+	it("doesn't submit the order if the total price is invalid.", async () => {
+		const products = [{ id: 1, price: 'a', quantity: 1 }];
+
+		render(<RouterProvider router={getRouter(products)} />);
+
+		const user = userEvent.setup();
+		const checkoutBtn = screen.getByRole('button', { name: 'Checkout' });
+		await user.click(checkoutBtn);
+
+		await waitFor(() => {
+			expect(screen.queryByText('NaN €')).toBeInTheDocument();
+			expect(
+				screen.queryByText('Returning to Home page shortly.')
+			).not.toBeInTheDocument();
+		});
+	});
 });
