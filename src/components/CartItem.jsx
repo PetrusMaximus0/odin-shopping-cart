@@ -16,8 +16,6 @@ const CartItem = ({ item }) => {
 		if (index !== -1) {
 			newCartItems[index].quantity = parseInt(e.target.value);
 			setCartItems(newCartItems);
-		} else {
-			console.error('Error!');
 		}
 	};
 
@@ -28,8 +26,6 @@ const CartItem = ({ item }) => {
 		if (index !== -1) {
 			newCartItems[index].quantity += 1;
 			setCartItems(newCartItems);
-		} else {
-			console.error("Couldn't find the item");
 		}
 	};
 
@@ -42,8 +38,6 @@ const CartItem = ({ item }) => {
 				newCartItems[index].quantity -= 1;
 				setCartItems(newCartItems);
 			}
-		} else {
-			console.error("Couldn't find the item");
 		}
 	};
 
@@ -54,8 +48,6 @@ const CartItem = ({ item }) => {
 		if (index !== -1) {
 			newCartItems.splice(index, 1);
 			setCartItems(newCartItems);
-		} else {
-			console.error("Couldn't find the item");
 		}
 	};
 
@@ -74,12 +66,19 @@ const CartItem = ({ item }) => {
 				{item.title}
 			</Link>
 			<div className="col-span-2 w-full flex justify-between items-center">
-				<div className=" flex justify-center" action="">
-					<p className="mr-4 text-lg">Quantity: </p>
-					<button onClick={decrementNum} type="button">
+				<fieldset className=" flex justify-center">
+					<label htmlFor="quantity" className="mr-4 text-lg">
+						Quantity:{' '}
+					</label>
+					<button
+						aria-label="decrease items"
+						onClick={decrementNum}
+						type="button"
+					>
 						<Icon path={mdiMinus} size={1} />
 					</button>
 					<input
+						id="quantity"
 						type="number"
 						min={1}
 						max={10}
@@ -88,10 +87,14 @@ const CartItem = ({ item }) => {
 						className="max-w-12 h-full text-center bg-inherit"
 						value={item.quantity}
 					/>
-					<button onClick={incrementNum} type="button">
+					<button
+						aria-label="increase items"
+						onClick={incrementNum}
+						type="button"
+					>
 						<Icon path={mdiPlus} size={1} />
 					</button>
-				</div>
+				</fieldset>
 				<p className="text-xl">
 					Total: {(item.quantity * item.price).toFixed(2)} €
 				</p>
