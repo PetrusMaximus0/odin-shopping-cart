@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
+import { IProduct } from '../interfaces';
 
-const useFetchProductDetail = (id) => {
-	const [data, setData] = useState(null);
-	const [error, setError] = useState(null);
-	const [loading, setLoading] = useState(true);
+const useFetchProductDetail = (id: string) => {
+	const [product, setProduct] = useState<null | IProduct>(null);
+	const [error, setError] = useState<null|Error>(null);
+	const [loading, setLoading] = useState<boolean>(true);
 
 	useEffect(() => {
-		const fetchData = async (id) => {
+		const fetchData = async (id: string) => {
 			setLoading(true);
 			try {
 				const url = 'https://fakestoreapi.com/products/' + id;
@@ -21,9 +22,9 @@ const useFetchProductDetail = (id) => {
 
 				const result = await response.json();
 
-				setData(result);
+				setProduct(result);
 			} catch (error) {
-				setError(error);
+				setError(error as Error);
 			}
 			setLoading(false);
 		};
@@ -32,7 +33,7 @@ const useFetchProductDetail = (id) => {
 		fetchData(id);
 	}, [id]);
 
-	return { product: data, loading, error };
+	return { product, loading, error };
 };
 
 export default useFetchProductDetail;

@@ -3,21 +3,22 @@ import { render, screen, waitFor } from '@testing-library/react';
 import AddToCartBtn from '../../src/components/AddToCartBtn';
 import userEvent from '@testing-library/user-event';
 import CartContext from '../../src/contexts/CartContext';
+import { ICartItem } from '../../src/interfaces';
 
 describe('AddToCartButton Component', () => {
 	const buttonText = 'click';
 
-	const BtnComponentWrapper = (
-		data = {},
-		cartItems = [],
-		setCartItems = () => {}
-	) => {
-		return (
-			<CartContext.Provider value={{ cartItems, setCartItems }}>
-				<AddToCartBtn data={data} btnText={buttonText} />
-			</CartContext.Provider>
-		);
-	};
+	const BtnComponentWrapper = (		
+			data: ICartItem = {} as ICartItem, 
+			cartItems: ICartItem[] = [] as ICartItem[],
+			setCartItems: (items?: ICartItem[]) => void = () => {},		
+	) => (
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-expect-error
+		<CartContext.Provider value={{ cartItems, setCartItems }}>
+			<AddToCartBtn data={data} btnText={buttonText} />
+		</CartContext.Provider>
+	)	
 
 	describe('Inputing numbers...', () => {
 		it('clicking the plus and minus buttons changes the value on the input. The value does not go below one', async () => {
@@ -25,7 +26,7 @@ describe('AddToCartButton Component', () => {
 			render(BtnComponentWrapper());
 
 			// Get input field
-			const inputField = screen.getByRole('spinbutton');
+			const inputField = screen.getByRole('spinbutton') as HTMLInputElement;
 			expect(inputField).toBeInTheDocument();
 			expect(inputField.value).toBe('1');
 
@@ -54,7 +55,7 @@ describe('AddToCartButton Component', () => {
 			render(BtnComponentWrapper());
 
 			//
-			const inputField = screen.getByRole('spinbutton');
+			const inputField = screen.getByRole('spinbutton') as HTMLInputElement;
 			expect(inputField.value).toBe('1');
 
 			//
@@ -76,13 +77,32 @@ describe('AddToCartButton Component', () => {
 
 	describe('Submitting the form...', () => {
 		it('the button text changes on submit and the item is added to cart', async () => {
-			const data = { id: 1 };
-			let cartItems = [{ id: 2, quantity: 1 }];
-			const setCartItems = (newItems) => {
+			const data : ICartItem = {
+				id: "1",
+				title: "title",
+				quantity: 1,
+				description: "description",
+				image: "/",
+				price: 100,
+			};
+
+			let cartItems : ICartItem[] = [
+				{
+					id: "2",
+					title: "title",
+					quantity: 1,
+					description: "description",
+					image: "/",
+					price: 100,		
+				}
+			];
+
+			const setCartItems : (newItems: ICartItem[]) => void = (newItems : ICartItem[]) => {
 				cartItems = [...newItems];
 			};
 
-			//
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-expect-error
 			render(BtnComponentWrapper(data, cartItems, setCartItems));
 
 			// cartItems has only one item
@@ -114,40 +134,75 @@ describe('AddToCartButton Component', () => {
 		});
 
 		it('adds correctly to the quantity of an item already in the cart', async () => {
-			const data = { id: 1 };
-			let cartItems = [
-				{ id: 1, quantity: 1 },
-				{ id: 2, quantity: 5 },
+			const data : ICartItem = {
+				id: "1",
+				title: "title",
+				quantity: 1,
+				description: "description",
+				image: "/",
+				price: 100,
+			};
+
+			let cartItems : ICartItem[] = [
+				{
+					id: "2",
+					title: "title",
+					quantity: 4,
+					description: "description",
+					image: "/",
+					price: 100,		
+				},
+				{
+					id: "1",
+					title: "title",
+					quantity: 1,
+					description: "description",
+					image: "/",
+					price: 100,		
+				}
 			];
-			const setCartItems = (newItems) => {
+
+			const setCartItems = (newItems : ICartItem[]) => {
 				cartItems = [...newItems];
 			};
 
-			//
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-expect-error
 			render(BtnComponentWrapper(data, cartItems, setCartItems));
-
+			
 			// Add an item to the cart
 			const user = userEvent.setup();
 			const submitButton = screen.getByText(/click/);
 			await user.click(submitButton);
-
+			
 			// The cart should have the same number of unique items as the start
 			expect(cartItems.length === 2).toBeTruthy();
-
+			
 			// The added item should have a quantity of 2
 			const index = cartItems.findIndex((item) => item.id === data.id);
 			expect(index !== -1).toBeTruthy();
 			expect(cartItems[index].quantity === 2).toBeTruthy();
+			
 		});
 
 		it('does not submit an invalid form.', async () => {
-			const data = { id: 1123213 };
-			let cartItems = [];
-			const setCartItems = (newItems) => {
+			const data : ICartItem = {
+				id: "1",
+				title: "title",
+				quantity: 1,
+				description: "description",
+				image: "/",
+				price: 100,
+			};
+
+			let cartItems : ICartItem[] = [];
+
+			const setCartItems = (newItems : ICartItem[]) => {
 				cartItems = newItems;
 			};
 
-			//
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-expect-error
 			render(BtnComponentWrapper(data, cartItems, setCartItems));
 
 			//

@@ -3,6 +3,7 @@ import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import routes from '../src/routes';
+import "@testing-library/jest-dom";
 
 describe('App component', () => {
 	vi.mock('../src/components/Home', () => ({
@@ -35,7 +36,7 @@ describe('App component', () => {
 			render(<RouterProvider router={router} />);
 
 			// The heading is there and has the text content
-			const headingElement = screen.queryByText(/the impulse shopper/i);
+			const headingElement = screen.queryByText(/the impulse shopper/i) as HTMLElement;
 			expect(headingElement).toBeInTheDocument();
 		});
 

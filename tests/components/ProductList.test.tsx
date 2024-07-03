@@ -6,6 +6,7 @@ import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { waitFor, render, screen } from '@testing-library/react';
 import { server } from '../mocks/server';
 import { http, HttpResponse } from 'msw';
+import { IProduct } from '../../src/interfaces';
 
 // We mock the product card element because we are not interested in testing its functionality in this testing file.
 vi.mock('../../src/components/ProductCard', () => ({
@@ -50,20 +51,35 @@ describe('ProductList component', () => {
 		// Override the fetch request
 		server.use(
 			http.get('https://fakestoreapi.com/products', () => {
+				const products: IProduct[] = [
+					{
+						id: "1",
+						title: "string",
+						price: 100,
+						description: "description",
+						image: "/",
+					},
+					{
+						id: "2",
+						title: "string",
+						price: 100,
+						description: "description",
+						image: "/",
+					},
+					{
+						id: "3",
+						title: "string",
+						price: 100,
+						description: "description",
+						image: "/",
+					},
+				]
 				// Respond to the request with this JSON response:
-				return HttpResponse.json([
-					{
-						id: 1,
-					},
-					{
-						id: 2,
-					},
-					{
-						id: 3,
-					},
-				]);
+				return HttpResponse.json(products);
 			}),
-			{ once: true }
+			{
+				once: true
+			}
 		);
 		// Create the router
 		const router = createMemoryRouter(routes, {

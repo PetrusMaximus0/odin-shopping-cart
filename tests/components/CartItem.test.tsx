@@ -1,20 +1,19 @@
-/* eslint-disable react/prop-types */
 //
 import { describe, it, expect } from 'vitest';
-
 //
 import CartItem from '../../src/components/CartItem';
 import CartContext from '../../src/contexts/CartContext';
 //
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
-import { getByTestId, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { useState } from 'react';
 import userEvent from '@testing-library/user-event';
+import { ICartItem } from '../../src/interfaces';
 
 //
 describe('CartItem Component', () => {
 	//
-	const CartItemWrapper = ({ item }) => {
+	const CartItemWrapper = ({ item } : { item: ICartItem }) => {
 		const [cartItems, setCartItems] = useState([item]);
 
 		return (
@@ -29,7 +28,7 @@ describe('CartItem Component', () => {
 	};
 
 	//
-	const getRouter = (item) => {
+	const getRouter = (item : ICartItem) => {
 		return createMemoryRouter([
 			{
 				path: '/',
@@ -39,12 +38,13 @@ describe('CartItem Component', () => {
 	};
 
 	// Initial Cart item
-	const item = {
+	const item: ICartItem = {
 		id: '1',
 		image: '/',
 		title: 'Product1',
 		quantity: 1,
 		price: 100,
+		description: "description",
 	};
 
 	//

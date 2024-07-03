@@ -1,16 +1,20 @@
 import PropTypes from 'prop-types';
-import { useState, useContext } from 'react';
+import { useState, useContext, FormEvent } from 'react';
 import Icon from '@mdi/react';
 import { mdiPlus, mdiMinus, mdiCheckCircleOutline } from '@mdi/js';
 import CartContext from '../contexts/CartContext';
+import { IProduct } from '../interfaces';
 
-const AddToCartBtn = ({ btnText = 'Add to Cart', data }) => {
+const AddToCartBtn = ({data, btnText} : { data: IProduct, btnText: string }) => {
 	//
-	const [altBtnText, setAltBtnText] = useState(null);
+	const [altBtnText, setAltBtnText] = useState<string>("");
+
+	// Number of items to add to the cart
+	const [num, setNum] = useState(1);
 
 	//
 	const incNum = () => {
-		setNum(parseInt(num + 1));
+		setNum(num + 1);
 	};
 
 	//
@@ -25,7 +29,7 @@ const AddToCartBtn = ({ btnText = 'Add to Cart', data }) => {
 	//
 	const { cartItems, setCartItems } = useContext(CartContext);
 
-	const handleAddToCart = (number) => {
+	const handleAddToCart = (number : number) => {
 		//
 		const newCartItems = [...cartItems];
 
@@ -44,11 +48,8 @@ const AddToCartBtn = ({ btnText = 'Add to Cart', data }) => {
 		}
 	};
 
-	// Number of items to add to the cart
-	const [num, setNum] = useState(1);
-
 	// Form Submission Callback
-	const submitForm = (e) => {
+	const submitForm = (e : FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (!isNaN(num) && num >= 1) {
 			// Add the items to the cartItems State
@@ -59,7 +60,7 @@ const AddToCartBtn = ({ btnText = 'Add to Cart', data }) => {
 			const intervalId = setInterval(() => {
 				if (timeNum === 0) {
 					clearInterval(intervalId);
-					setAltBtnText(null);
+					setAltBtnText("");
 				} else {
 					timeNum -= 1;
 				}
@@ -67,8 +68,8 @@ const AddToCartBtn = ({ btnText = 'Add to Cart', data }) => {
 		}
 	};
 
-	const handleInputChange = (e) => {
-		setNum(parseInt(e.target.value));
+	const handleInputChange = (e : FormEvent<HTMLInputElement>) => {
+		setNum(parseInt(e.currentTarget.value));
 	};
 
 	return (

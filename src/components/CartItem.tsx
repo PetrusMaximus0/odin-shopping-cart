@@ -2,19 +2,20 @@ import Icon from '@mdi/react';
 import PropTypes from 'prop-types';
 import { mdiPlus, mdiMinus } from '@mdi/js';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, FormEvent } from 'react';
 import CartContext from '../contexts/CartContext';
+import { ICartItem } from '../interfaces';
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item }:{item: ICartItem}) => {
 	//
 	const { cartItems, setCartItems } = useContext(CartContext);
 
 	//
-	const handleNumChange = (e) => {
+	const handleNumChange = (e: FormEvent<HTMLInputElement>) => {
 		const newCartItems = [...cartItems];
 		const index = newCartItems.findIndex((element) => element.id === item.id);
 		if (index !== -1) {
-			newCartItems[index].quantity = parseInt(e.target.value);
+			newCartItems[index].quantity = parseInt(e.currentTarget.value);
 			setCartItems(newCartItems);
 		}
 	};

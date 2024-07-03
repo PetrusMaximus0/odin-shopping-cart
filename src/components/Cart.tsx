@@ -1,6 +1,6 @@
 import CartItem from './CartItem';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, FormEvent } from 'react';
 import CartContext from '../contexts/CartContext';
 
 const Cart = () => {
@@ -27,7 +27,7 @@ const Cart = () => {
 	}, [cartItems]);
 
 	// Set up the order submission
-	const handleOrderSubmit = (e) => {
+	const handleOrderSubmit = (e: FormEvent) => {
 		e.preventDefault();
 
 		// Prevent submiting orders with NaN price values.

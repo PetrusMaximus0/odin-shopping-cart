@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
+import { IProduct } from "../interfaces";
 
 const useFetchProducts = () => {
-	const [data, setData] = useState(null);
-	const [error, setError] = useState(null);
-	const [loading, setLoading] = useState(true);
+	const [products, setProducts] = useState<IProduct[]>([]);
+	const [error, setError] = useState<null | Error>(null);
+	const [loading, setLoading] = useState<boolean>(true);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -21,9 +22,9 @@ const useFetchProducts = () => {
 
 				const result = await response.json();
 
-				setData(result);
+				setProducts(result);
 			} catch (error) {
-				setError(error);
+				setError(error as Error);
 			}
 			setLoading(false);
 		};
@@ -32,7 +33,7 @@ const useFetchProducts = () => {
 		fetchData();
 	}, []);
 
-	return { products: data, loading, error };
+	return { products, loading, error };
 };
 
 export default useFetchProducts;

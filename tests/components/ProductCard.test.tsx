@@ -2,6 +2,7 @@ import { expect, it, describe, vi } from 'vitest';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import ProductCard from '../../src/components/ProductCard';
 import { render, screen } from '@testing-library/react';
+import { IProduct } from '../../src/interfaces';
 
 vi.mock('../../src/components/AddToCartBtn', () => ({
 	default: () => {
@@ -11,13 +12,14 @@ vi.mock('../../src/components/AddToCartBtn', () => ({
 
 describe('Product Card component', () => {
 	const product = {
-		id: 13,
+		id: "13",
 		title: 'Title Product',
 		price: 700,
 		image: 'link',
+		description: "description"
 	};
 
-	const getRouter = (productData) => {
+	const getRouter = (productData : IProduct) => {
 		const routes = [
 			{
 				path: '/',

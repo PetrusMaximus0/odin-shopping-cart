@@ -19,7 +19,7 @@ const ProductList = () => {
 					<ul className="main-animate grid gap-4 px-2 justify-around grid-cols-[repeat(auto-fit,340px)]">
 						{
 							// Based on the number of items that were retrieved, we render them on the page.
-							products.map((item) => {
+							products!.map((item) => {
 								return <ProductCard key={item.id} data={item} />;
 							})
 						}

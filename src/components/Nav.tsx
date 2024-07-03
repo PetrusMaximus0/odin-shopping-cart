@@ -4,14 +4,15 @@ import Icon from '@mdi/react';
 import { mdiHome, mdiCartVariant, mdiShoppingOutline } from '@mdi/js';
 import { useContext, useEffect, useState } from 'react';
 import CartContext from '../contexts/CartContext';
+import { ICartItem } from '../interfaces';
 
 const Nav = () => {
 	const [cartItemCount, setCartItemCount] = useState(0);
 
 	const { cartItems } = useContext(CartContext);
-
+	
 	useEffect(() => {
-		const result = cartItems.reduce((accumulator, currentValue) => {
+		const result = cartItems.reduce((accumulator: number, currentValue: ICartItem) => {
 			return accumulator + currentValue.quantity;
 		}, 0);
 		setCartItemCount(result);

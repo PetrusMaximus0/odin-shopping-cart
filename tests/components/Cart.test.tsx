@@ -1,12 +1,10 @@
 import { describe, it, expect, vi } from 'vitest';
 import { screen, render, waitFor } from '@testing-library/react';
-
 import Cart from '../../src/components/Cart';
 import CartContext from '../../src/contexts/CartContext';
-
+import { ICartItem } from '../../src/interfaces';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-
 import { useState } from 'react';
 
 vi.mock('../../src/components/CartItem', () => ({
@@ -16,8 +14,10 @@ vi.mock('../../src/components/CartItem', () => ({
 //
 describe('Cart Component', () => {
 	//
-	const CartWrapper = ({ items }) => {
+	const CartWrapper = ({ items } : {items: ICartItem[]}) => {
+		
 		const [cartItems, setCartItems] = useState(items);
+		
 		return (
 			<CartContext.Provider value={{ cartItems, setCartItems }}>
 				<Cart />
@@ -26,7 +26,7 @@ describe('Cart Component', () => {
 	};
 
 	//
-	const getRouter = (products) =>
+	const getRouter = (items : ICartItem[]) =>
 		createMemoryRouter(
 			[
 				{
@@ -35,7 +35,7 @@ describe('Cart Component', () => {
 				},
 				{
 					path: '/cart',
-					element: <CartWrapper items={products} />,
+					element: <CartWrapper items={items} />,
 				},
 			],
 			{
@@ -51,24 +51,52 @@ describe('Cart Component', () => {
 	});
 
 	it('shows the correct number of cart items when there are items in the cart as well as the correct total price', () => {
-		const products = [
-			{ id: 1, price: 1000, quantity: 1 },
-			{ id: 2, price: 2000, quantity: 2 },
-			{ id: 3, price: 1000, quantity: 1 },
-			{ id: 4, price: 1000, quantity: 3 },
+		const items : ICartItem[] = [
+			{
+				id: "1",
+				title: "title 1",
+				price: 35,
+				description: "desc 1",
+				image: "/",
+				quantity: 1,
+			},
+			{
+				id: "2",
+				title: "title 2",
+				price: 150,
+				description: "desc 2",
+				image: "/",
+				quantity: 3,
+			},
+			{
+				id: "3",
+				title: "title 3",
+				price: 200,
+				description: "desc 1",
+				image: "/",
+				quantity: 5,
+			},
+			{
+				id: "4",
+				title: "title 4",
+				price: 50,
+				description: "desc 2",
+				image: "/",
+				quantity: 2,
+			},
 		];
 
-		const totalPrice = products.reduce(
+		const totalPrice = items.reduce(
 			(accumulator, currentValue) =>
 				accumulator + currentValue.price * currentValue.quantity,
 			0
 		);
 
-		render(<RouterProvider router={getRouter(products)} />);
+		render(<RouterProvider router={getRouter(items)} />);
 
 		//
-		const items = screen.queryAllByText('Item Card');
-		expect(items.length === products.length).toBeTruthy();
+		const itemCards = screen.queryAllByText('Item Card');
+		expect(itemCards.length === items.length).toBeTruthy();
 
 		// Shows the price correctly
 		const total = screen.queryByText(`${totalPrice.toFixed(2)} €`);
@@ -76,9 +104,16 @@ describe('Cart Component', () => {
 	});
 
 	it('fake submits successfuly on Checkout', async () => {
-		const products = [{ id: 1, price: 1000, quantity: 1 }];
+		const items = [{
+				id: "4",
+				title: "title 4",
+				price: 50,
+				description: "desc 2",
+				image: "/",
+				quantity: 2,
+			},];
 
-		render(<RouterProvider router={getRouter(products)} />);
+		render(<RouterProvider router={getRouter(items)} />);
 
 		const user = userEvent.setup();
 		const checkoutBtn = screen.getByRole('button', { name: 'Checkout' });
@@ -103,9 +138,18 @@ describe('Cart Component', () => {
 	});
 
 	it("doesn't submit the order if the total price is invalid.", async () => {
-		const products = [{ id: 1, price: 'a', quantity: 1 }];
-
-		render(<RouterProvider router={getRouter(products)} />);
+		const items = [{
+				id: "4",
+				title: "title 4",
+				price: 50,
+				description: "desc 2",
+				image: "/",
+				quantity: "a",
+		},];
+		
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-expect-error
+		render(<RouterProvider router={getRouter(items)} />);
 
 		const user = userEvent.setup();
 		const checkoutBtn = screen.getByRole('button', { name: 'Checkout' });
