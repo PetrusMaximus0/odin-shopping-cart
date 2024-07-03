@@ -77,9 +77,6 @@ describe('ProductList component', () => {
 				// Respond to the request with this JSON response:
 				return HttpResponse.json(products);
 			}),
-			{
-				once: true
-			}
 		);
 		// Create the router
 		const router = createMemoryRouter(routes, {
