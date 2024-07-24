@@ -8,7 +8,7 @@ The assignment consists of a mock shopping cart. The user should be able to brow
 
 As the user adds or removes items to the cart, the total amount on the cart adjusts accordingly.
 
-Testing is being implemented with the React Testing Library, and Mock Service Worker.
+Testing implemented with the React Testing Library, and Mock Service Worker.
 
 Built with React. Uses FakeStore API for fetch requests.
 
