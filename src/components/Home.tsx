@@ -4,11 +4,11 @@ const Home = () => {
 	return (
 		<section className="main-animate h-full flex flex-row flex-wrap justify-around items-center">
 			<header className="text-center">
-				<h1 className="text-orange-400 text-5xl my-4"> Impulse Shopper </h1>
+				<h1 className="text-teal-950 text-8xl my-4"> Impulse Shopper </h1>
 				<p className="text-2xl my-8 flex gap-4 items-center justify-center">
 					Don&apos;t think, just
 					<Link
-						className="hover:bg-orange-300 hover: max-w-fit text-2xl px-6 py-1 bg-orange-300 text-orange-700 rounded-xl"
+						className="hover:text-orange-500 hover:border-orange-400 hover:bg-transparent bg-orange-400 text-6xl px-12 py-4 border border-teal-950 text-teal-950 rounded-xl"
 						to="/products"
 					>
 						Buy
