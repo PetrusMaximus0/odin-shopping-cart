@@ -7,7 +7,7 @@ import { IProduct } from '../interfaces';
 
 const AddToCartBtn = ({data, btnText} : { data: IProduct, btnText: string }) => {
 	//
-	const [altBtnText, setAltBtnText] = useState<string>("");
+	const [altBtnText, setAltBtnText] = useState<string|null>(null);
 
 	// Number of items to add to the cart
 	const [num, setNum] = useState(1);
@@ -55,16 +55,13 @@ const AddToCartBtn = ({data, btnText} : { data: IProduct, btnText: string }) => 
 			// Add the items to the cartItems State
 			handleAddToCart(num);
 			setNum(1);
-			let timeNum = 3;
 			setAltBtnText(`Item Added`);
-			const intervalId = setInterval(() => {
-				if (timeNum === 0) {
-					clearInterval(intervalId);
-					setAltBtnText("");
-				} else {
-					timeNum -= 1;
-				}
-			}, 1000);
+			
+			// 
+			const timeOutId = setTimeout(()=>{
+				clearTimeout(timeOutId);
+				setAltBtnText(null);
+			}, 2000);
 		}
 	};
 
