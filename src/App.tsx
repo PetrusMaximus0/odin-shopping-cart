@@ -10,9 +10,9 @@ function App() {
 					<h1>
 						<Link
 							to="/"
-							className="text-2xl italic hover:text-orange-400"
+							className="text-2xl hover:text-orange-400"
 						>
-							THE IMPULSE SHOPPER
+							IMPULSE SHOPPER
 						</Link>
 					</h1>
 					<Nav />
