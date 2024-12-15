@@ -12,4 +12,4 @@ Testing implemented with the React Testing Library, and Mock Service Worker.
 
 Built with React. Uses FakeStore API for fetch requests.
 
-Live demo: [https://e74f4fdd.odin-shopping-cart-8zm.pages.dev/](https://e74f4fdd.odin-shopping-cart-8zm.pages.dev/)
+Live demo: [https://odin-shopping-cart-8zm.pages.dev/](https://odin-shopping-cart-8zm.pages.dev/)
