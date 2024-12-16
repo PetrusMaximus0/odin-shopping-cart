@@ -1,4 +1,6 @@
 import './App.scss';
+import Icon from '@mdi/react';
+import { mdiGithub } from '@mdi/js';
 import { Link, Outlet } from 'react-router-dom';
 import Nav from './components/Nav';
 
@@ -30,7 +32,7 @@ function App() {
 						href="https://github.com/PetrusMaximus0"
 					>
 						@ Pedro Silva
-						<i className="devicon-github-original"></i>
+						<Icon path={mdiGithub} size={1} />
 					</a>
 				</p>
 			</footer>
