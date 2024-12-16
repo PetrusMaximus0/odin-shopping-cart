@@ -108,7 +108,7 @@ const AddToCartBtn = ({data, btnText} : { data: IProduct, btnText: string }) => 
 
 			<button
 				type="submit"
-				className="hover:bg-teal-500 text-white bg-orange-300 active:bg-orange-300 rounded-xl px-4 py-1"
+				className="hover:bg-teal-500 text-teal-950 bg-orange-300 active:bg-orange-300 rounded-xl px-4 py-1"
 			>
 				{altBtnText || btnText}
 			</button>
