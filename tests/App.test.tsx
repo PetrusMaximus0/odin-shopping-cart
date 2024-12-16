@@ -83,14 +83,14 @@ describe('App component', () => {
 			// Check cart link
 			const cartLink = screen.getByRole('link', { name: /cart/i });
 			await user.click(cartLink);
-			waitFor(() => {
+			await waitFor(() => {
 				expect(screen.queryByText(/cart element/i)).toBeInTheDocument();
 			});
 
 			// Check products link
 			const productsLink = screen.getByRole('link', { name: /products/i });
 			await user.click(productsLink);
-			waitFor(() => {
+			await waitFor(() => {
 				expect(screen.queryByText(/products element/i)).toBeInTheDocument();
 			});
 
@@ -99,8 +99,8 @@ describe('App component', () => {
 				name: /home/i,
 			});
 			await user.click(homeLink);
-			waitFor(() => {
-				expect(screen.queryByText(/home element/i)).toBeInTheDocument();
+			await waitFor(() => {
+				expect(screen.queryByText(/homepage element/i)).toBeInTheDocument();
 			});
 		});
 	});
