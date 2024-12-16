@@ -36,7 +36,7 @@ describe('App component', () => {
 			render(<RouterProvider router={router} />);
 
 			// The heading is there and has the text content
-			const headingElement = screen.queryByText(/the impulse shopper/i) as HTMLElement;
+			const headingElement = screen.queryByText(/impulse shopper/i) as HTMLElement;
 			expect(headingElement).toBeInTheDocument();
 		});
 
@@ -54,7 +54,7 @@ describe('App component', () => {
 			expect(screen.queryByText(/homepage element/i)).toBeFalsy();
 
 			//
-			const linkElement = screen.getByText(/the impulse shopper/i);
+			const linkElement = screen.getByText(/impulse shopper/i);
 
 			// Set up the events.
 			const user = userEvent.setup();
