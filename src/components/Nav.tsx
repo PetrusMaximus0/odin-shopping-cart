@@ -19,34 +19,33 @@ const Nav = () => {
 	}, [cartItems]);
 
 	return (
-		<nav className="text-lg">
-			<ul className="flex gap-4">
-				<li>
+		<nav>
+			<ul className="flex gap-1.5 text-2xl text-complementary">
+				<li className="w-fit h-fit bg-primary rounded-lg px-2 py-1.5">
 					<Link
-						className="flex items-center gap-1 hover:text-orange-300"
+						className="flex items-center gap-1.5 hover:text-accent"
 						to="/"
 					>
 						<Icon path={mdiHome} size={1} />
 						Home
 					</Link>
 				</li>
-				<li>
+				<li className="w-fit h-fit bg-primary rounded-lg px-2 py-1.5"> 
 					<Link
-						className="flex items-center gap-1 hover:text-orange-300"
+						className="flex items-center gap-1 hover:text-accent"
 						to="/products"
 					>
 						<Icon path={mdiShoppingOutline} size={1} />
 						Products
 					</Link>
 				</li>
-				<li>
+				<li className="w-fit h-fit bg-primary rounded-lg px-2 py-1.5">
 					<Link
-						className="flex items-center gap-1 hover:text-orange-300"
+						className="flex items-center gap-1 hover:text-accent"
 						to="/cart"
 					>
 						<Icon path={mdiCartVariant} size={1} />
 						<span>
-							{' '}
 							Cart {cartItemCount > 0 ? `(${cartItemCount})` : ''}
 						</span>
 					</Link>

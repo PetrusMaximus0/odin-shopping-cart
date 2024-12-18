@@ -54,7 +54,7 @@ const CartItem = ({ item }:{item: ICartItem}) => {
 
 	return (
 		<div
-			className="bg-white my-4 rounded-xl text-teal-950 w-full items-center grid grid-rows-[auto_1fr_1fr] grid-cols-1 sm:grid-cols-[8rem_auto_1fr] gap-8 py-4 px-2"
+			className="bg-primary my-4 rounded-xl w-full items-center grid grid-rows-[auto_1fr_1fr] grid-cols-1 sm:grid-cols-[8rem_auto_1fr] gap-8 py-4 px-2"
 			key={item.id}
 		>
 			<figure className="row-span-3 max-w-32 mx-auto">
@@ -102,7 +102,7 @@ const CartItem = ({ item }:{item: ICartItem}) => {
 			</div>
 			<button
 				onClick={removeItem}
-				className=" text-white col-span-2 w-fit px-6 py-1 mx-auto sm:mx-0 rounded-3xl bg-orange-300 hover:bg-teal-500"
+				className=" text-complementary col-span-2 w-fit px-6 py-1 mx-auto sm:mx-0 rounded-3xl bg-red-600 hover:border-accent border border-transparent"
 			>
 				Remove
 			</button>
