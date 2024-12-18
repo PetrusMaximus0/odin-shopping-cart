@@ -8,7 +8,7 @@ const ProductList = () => {
 	return (
 		<section>
 			{(loading && (
-				<p className="text-center text-4xl">Loading products</p>
+				<p className="text-center text-4xl text-complementary">Loading products</p>
 			)) ||
 				(error && (
 					<div>

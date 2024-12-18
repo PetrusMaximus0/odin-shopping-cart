@@ -2,15 +2,16 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
 	return (
-		<section className="main-animate h-full flex flex-col justify-start items-center gap-14 text-teal-950 text-center my-8">
+		<section className="main-animate h-full flex flex-col justify-start items-center gap-14 text-complementary text-center my-8">
 			<p className={"capitalize text-5xl"}>
-				Don&apos;t think <br/>
-				just
+				Don&apos;t think
 			</p>
+			
 			<Link
-				className="hover:shadow-teal-950 hover:shadow-md active:shadow-none active:bg-teal-950 active:text-orange-400 bg-orange-400 text-7xl px-12 py-4 rounded-xl"
+				className="bg-gradient-to-r hover:from-complementary hover:to-neutral from-ctaBgA to-ctaBgB text-logoText text-6xl w-80 h-32 flex justify-center items-center bg-white rounded-2xl"
 				to="/products"
 			>
+				<span className={"capitalize text-4xl mr-2"}>just</span>
 				Buy
 			</Link>
 			<figure className="w-full">

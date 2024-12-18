@@ -2,13 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-$background-color: #242424;
-
 body{
     margin: 0;
     min-width: 320px;
     min-height: 100vh;
-    background-color: beige;
 }
 
 #root{  

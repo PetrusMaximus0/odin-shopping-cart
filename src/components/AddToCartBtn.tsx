@@ -71,14 +71,14 @@ const AddToCartBtn = ({data, btnText} : { data: IProduct, btnText: string }) => 
 
 	return (
 		<form
-			className="flex justify-between items-center gap-1"
+			className="flex justify-between items-center gap-1 w-full"
 			onSubmit={submitForm}
 			action=""
 		>
 			<div className="flex justify-center items-center gap-1">
 				<button
 					aria-label="decrease items"
-					className="hover:bg-teal-500 active:bg-orange-300 active:text-white rounded-xl"
+					className="hover:bg-red-500 active:bg-accent active:text-white rounded-xl"
 					onClick={decNum}
 					type="button"
 				>
@@ -86,7 +86,7 @@ const AddToCartBtn = ({data, btnText} : { data: IProduct, btnText: string }) => 
 				</button>
 				<input
 					aria-label="product number"
-					className="w-16 rounded-xl border border-teal-950 text-center"
+					className="w-16 rounded-xl bg-neutral text-center"
 					min={1}
 					max={10}
 					type="number"
@@ -98,24 +98,23 @@ const AddToCartBtn = ({data, btnText} : { data: IProduct, btnText: string }) => 
 				/>
 				<button
 					aria-label="increase items"
-					className="hover:bg-teal-500 active:bg-orange-300 active:text-white rounded-xl"
+					className="hover:bg-teal-500 active:bg-accent active:text-white rounded-xl"
 					onClick={incNum}
 					type="button"
 				>
 					<Icon path={mdiPlus} size={1} />
 				</button>
 			</div>
-
 			<button
 				type="submit"
-				className="hover:bg-teal-500 text-teal-950 bg-orange-300 active:bg-orange-300 rounded-xl px-4 py-1"
+				className="text-lg active:bg-accent active:text-neutral hover:border hover:border-accent bg-neutral text-complementary font-bold rounded-2xl w-32 px-1 py-1"
 			>
 				{altBtnText || btnText}
 			</button>
 			<Icon
 				className={altBtnText !== null ? 'text-teal-500' : 'invisible'}
 				path={mdiCheckCircleOutline}
-				size={1}
+				size={2}
 			/>
 		</form>
 	);

@@ -5,7 +5,7 @@ import AddToCartBtn from './AddToCartBtn';
 
 const ProductCard = ({ data } : { data: IProduct }) => {
 	return (
-		<li className="grid gap-4 p-8 bg-white border border-black rounded-2xl text-slate-800 content-between justify-center grid-rows-[150px_repeat(3,auto)]">
+		<li className="grid gap-4 p-4 text-complementary bg-primary rounded-2xl content-between justify-center grid-rows-[150px_repeat(3,auto)]">
 			<figure className={"h-36 w-36 mx-auto"}>
 				<img
 					className="object-contain h-full w-auto mx-auto"

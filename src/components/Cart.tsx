@@ -49,8 +49,8 @@ const Cart = () => {
 	//
 	return (
 		(cartItems.length > 0 && (
-			<section className="container main-animate flex flex-col my-4 mx-auto px-8 gap-4">
-				<h1 className="text-4xl text-center sm:text-left text-white">
+			<section className="text-complementary container main-animate flex flex-col my-4 mx-auto px-8 gap-4">
+				<h1 className="text-4xl text-center sm:text-left">
 					Your Order
 				</h1>
 				<form
@@ -74,7 +74,7 @@ const Cart = () => {
 					<button
 						form="cart"
 						type="submit"
-						className="self-center w-fit px-4 py-1 bg-orange-300 hover:bg-teal-500 hover:text-orange-300 text-teal-950 rounded-xl text-2xl font-light"
+						className="self-center w-fit px-4 py-1 bg-gradient-to-r from-ctaBgA to-ctaBgB hover:from-complementary hover:to-primary text-logoText rounded-lg text-2xl font-light"
 					>
 						Checkout
 					</button>
@@ -89,11 +89,11 @@ const Cart = () => {
 				)}
 			</section>
 		)) || (
-			<section className="text-center">
+			<section className="text-center text-complementary">
 				<h1 className="text-4xl my-8 ">Your Cart is Empty</h1>
 				<p className="font-light text-2xl">
 					Would you like to{' '}
-					<Link className="text-orange-600" to="/products">
+					<Link className="text-accent" to="/products">
 						Browse our wares?
 					</Link>
 				</p>

@@ -22,7 +22,7 @@ const ProductDetail = () => {
 				)
 				|| null !== product
 				&&
-					<section className="bg-white text-black font-bold p-2 rounded-2xl container h-full flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-between gap-4">
+					<section className="bg-primary text-complementary font-bold p-2 rounded-2xl container h-full flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-between gap-4">
 						<figure className="max-w-80 min-w-72">
 							<img
 								className="object-contain h-full w-full"
