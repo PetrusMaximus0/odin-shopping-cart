@@ -20,7 +20,7 @@ describe('AddToCartButton Component', () => {
 		</CartContext.Provider>
 	)	
 
-	describe('Inputing numbers...', () => {
+	describe('Inputting numbers...', () => {
 		it('clicking the plus and minus buttons changes the value on the input. The value does not go below one', async () => {
 			//
 			render(BtnComponentWrapper());
@@ -50,7 +50,7 @@ describe('AddToCartButton Component', () => {
 			//
 		});
 
-		it('Manually inputing a number works correctly', async () => {
+		it('Manually inputting a number works correctly', async () => {
 			//
 			render(BtnComponentWrapper());
 
@@ -206,7 +206,7 @@ describe('AddToCartButton Component', () => {
 			render(BtnComponentWrapper(data, cartItems, setCartItems));
 
 			//
-			const inputField = screen.getByRole('spinbutton');
+			const inputField : HTMLInputElement = screen.getByRole('spinbutton');
 
 			//
 			const user = userEvent.setup();
