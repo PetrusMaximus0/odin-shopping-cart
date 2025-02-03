@@ -66,7 +66,8 @@ const AddToCartBtn = ({data, btnText} : { data: IProduct, btnText: string }) => 
 	};
 
 	const handleInputChange = (e : FormEvent<HTMLInputElement>) => {
-		setNum(parseInt(e.currentTarget.value));
+		const val = parseInt(e.currentTarget.value);
+		Number.isNaN(val) ? setNum(0) : setNum(val);
 	};
 
 	return (
@@ -95,6 +96,7 @@ const AddToCartBtn = ({data, btnText} : { data: IProduct, btnText: string }) => 
 					required
 					value={num}
 					onChange={handleInputChange}
+					onFocus={e => e.target.select()}
 				/>
 				<button
 					aria-label="increase items"
