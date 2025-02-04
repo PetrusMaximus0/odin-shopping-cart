@@ -15,22 +15,22 @@ const useFetchProductDetail = (id: string) => {
 				const response = await fetch(url, { mode: 'cors', method: 'GET' });
 
 				if (response.status >= 400) {
-					throw new Error('Server Error');
+					setError(new Error('Server Error'));
+					return;
 				} else if (!response.ok) {
-					throw new Error(response.statusText);
+					setError(new Error(response.statusText));
+					return;
 				}
-
 				const result = await response.json();
-
 				setProduct(result);
 			} catch (error) {
-				setError(error as Error);
+				setError(error instanceof Error ? error : new Error(`Error: ${error}`));
 			}
 			setLoading(false);
 		};
 
-		//
-		fetchData(id);
+		(async ()=> await fetchData(id))();
+
 	}, [id]);
 
 	return { product, loading, error };
