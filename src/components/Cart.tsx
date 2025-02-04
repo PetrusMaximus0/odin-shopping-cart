@@ -1,31 +1,22 @@
 import CartItem from './CartItem';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useContext, useEffect, FormEvent } from 'react';
+import {useState, useContext, FormEvent, useMemo} from 'react';
 import CartContext from '../contexts/CartContext';
 
 const Cart = () => {
 	//
 	const navigate = useNavigate();
-
 	const { cartItems, setCartItems } = useContext(CartContext);
-
-	const [orderPlaced, setOrderPlaced] = useState(false);
+	const [ orderPlaced, setOrderPlaced ] = useState(false);
 
 	//
-	const [totalPrice, setTotalPrice] = useState(0);
-
-	useEffect(() => {
-		//
-		const newTotalPrice = cartItems.reduce(
+	const totalPrice = useMemo(()=> 
+		cartItems.reduce(
 			(accumulator, currentValue) =>
 				accumulator + currentValue.price * currentValue.quantity,
 			0
-		);
-
-		//
-		setTotalPrice(newTotalPrice);
-	}, [cartItems]);
-
+		),[cartItems]);
+	
 	// Set up the order submission
 	const handleOrderSubmit = (e: FormEvent) => {
 		e.preventDefault();
