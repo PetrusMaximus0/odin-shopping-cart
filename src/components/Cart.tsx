@@ -30,7 +30,7 @@ const Cart = () => {
 	const handleOrderSubmit = (e: FormEvent) => {
 		e.preventDefault();
 
-		// Prevent submiting orders with NaN price values.
+		// Prevent submitting orders with NaN price values.
 		if (isNaN(totalPrice)) {
 			console.error('Error Submitting the Order');
 			return;
